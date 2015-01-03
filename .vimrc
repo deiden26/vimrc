@@ -22,6 +22,12 @@ call plug#end()
 " Plugin Options
 "-------------------------------"
 
+" Enable autocompletion
+let g:neocomplcache_enable_at_startup = 1
+
+" Enable tab to autocomplete
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
 " Show hidden files in NerdTree
 let NERDTreeShowHidden=1
 
@@ -44,7 +50,7 @@ let g:airline_symbols.whitespace = 'Ξ'
 "-------------------------------"
 
 " Map escape key to ;;  -- much faster
-map ;; <esc>
+imap ;; <esc>
 nmap '' <S-:>
 
 " Want a different map leader than \
