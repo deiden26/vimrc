@@ -76,6 +76,9 @@ colorscheme molokai
 " Show lines numbers
 set number
 
+" Amount of space a tab uses
+set tabstop=4
+
 "Enable filetypes
 filetype on
 filetype plugin on
