@@ -52,7 +52,11 @@ let g:airline_symbols.whitespace = 'Ξ'
 
 " Map escape key to ;;  -- much faster
 imap ;; <esc>
+" Map : to '' -- maybe faster?
 nmap '' <S-:>
+
+" Map paste toggle to F1
+set pastetoggle=<F1>
 
 " Want a different map leader than \
 let mapleader=","
