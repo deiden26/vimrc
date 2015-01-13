@@ -38,7 +38,7 @@ set laststatus=2
 
 " Set airline to use unicode symbols
 if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
+	let g:airline_symbols = {}
 endif
 let g:airline_right_sep = '◀'
 let g:airline_left_sep = '▶'
@@ -58,6 +58,9 @@ nmap '' <S-:>
 
 " Map paste toggle to F1
 set pastetoggle=<F1>
+
+" Map fix indentation to F2
+map <F2> mzgg=G`z<CR>
 
 " Want a different map leader than \
 let mapleader=","
@@ -81,9 +84,6 @@ colorscheme molokai
 " Show lines numbers
 set number
 
-" Amount of space a tab uses
-set tabstop=4
-
 "Enable filetypes
 filetype on
 filetype plugin on
@@ -96,10 +96,10 @@ syntax on
 
 " Source the vimrc file after saving it. This way, you don't have to reload Vim to see the changes.
 if has("autocmd")
-  augroup myvimrchooks
-     au!
-     autocmd bufwritepost .vimrc source ~/.vimrc
-  augroup END
+	augroup myvimrchooks
+		au!
+		autocmd bufwritepost .vimrc source ~/.vimrc
+	augroup END
 endif
 
 " Automatically change current directory to that of the file in the buffer
@@ -111,3 +111,7 @@ set foldenable
 " Indent stuff
 set smartindent
 set autoindent
+
+" Amount of space a tab uses
+set tabstop=4
+set shiftwidth=4
