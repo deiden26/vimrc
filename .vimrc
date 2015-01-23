@@ -17,6 +17,7 @@ Plug 'Shougo/neocomplcache.vim'
 Plug 'tomasr/molokai'
 Plug 'digitaltoad/vim-jade'
 Plug 'pangloss/vim-javascript'
+Plug 'wavded/vim-stylus'
 
 call plug#end()
 
