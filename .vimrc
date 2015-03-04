@@ -18,6 +18,7 @@ Plug 'tomasr/molokai'
 Plug 'digitaltoad/vim-jade'
 Plug 'pangloss/vim-javascript'
 Plug 'wavded/vim-stylus'
+Plug 'kien/ctrlp.vim'
 
 call plug#end()
 
@@ -48,6 +49,21 @@ let g:airline_symbols.branch = '⎇'
 let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.whitespace = 'Ξ'
 
+" Set cltp's working director to first parent with .git or the directory of the current file
+let g:ctrlp_working_path_mode = 'ra'
+
+" Use Silver Searcher for grep and cltp
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
 "-------------------------------"
 " Custom Key Bindings
 "-------------------------------"
@@ -72,6 +88,10 @@ nnoremap <leader>ft Vatzf
 " Shortcut for NERDTreeToggle
 nmap <leader>nt :NERDTreeToggle <CR>
 nmap <leader>ut :UndotreeToggle <CR>
+
+" Change the default mapping and the default command to invoke CtrlP:CtrlP
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
 
 "-------------------------------"
 " Appearence
