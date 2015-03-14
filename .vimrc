@@ -19,6 +19,7 @@ Plug 'digitaltoad/vim-jade'
 Plug 'pangloss/vim-javascript'
 Plug 'wavded/vim-stylus'
 Plug 'kien/ctrlp.vim'
+Plug 'othree/javascript-libraries-syntax.vim'
 
 call plug#end()
 
@@ -34,6 +35,9 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Show hidden files in NerdTree
 let NERDTreeShowHidden=1
+
+"Make syntastic work better with Angular
+let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
 
 " Always use airline
 set laststatus=2
