@@ -26,6 +26,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'wavded/vim-stylus'
 Plug 'kien/ctrlp.vim'
 Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'groenewege/vim-less'
 
 call plug#end()
 
