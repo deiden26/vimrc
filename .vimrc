@@ -123,6 +123,23 @@ filetype indent on
 syntax on
 
 "-------------------------------"
+" Tabs
+"-------------------------------"
+set smartindent
+set autoindent
+
+filetype plugin indent on
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
+"-------------------------------"
+" Code Folding
+"-------------------------------"
+set foldmethod=indent   
+set foldlevelstart=9001
+
+"-------------------------------"
 " Other
 "-------------------------------"
 
@@ -136,14 +153,3 @@ endif
 
 " Automatically change current directory to that of the file in the buffer
 autocmd BufEnter * cd %:p:h
-
-" Enable code folding
-set foldenable
-
-" Indent stuff
-set smartindent
-set autoindent
-
-" Amount of space a tab uses
-set tabstop=4
-set shiftwidth=4
