@@ -3,9 +3,9 @@
 "-------------------------------"
 
 if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall
 endif
 
 call plug#begin('~/.vim/plugged')
@@ -50,7 +50,7 @@ set laststatus=2
 
 " Set airline to use unicode symbols
 if !exists('g:airline_symbols')
-	let g:airline_symbols = {}
+    let g:airline_symbols = {}
 endif
 let g:airline_right_sep = '◀'
 let g:airline_left_sep = '▶'
@@ -64,14 +64,14 @@ let g:ctrlp_working_path_mode = 'ra'
 
 " Use Silver Searcher for grep and cltp
 if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
+    " Use ag over grep
+    set grepprg=ag\ --nogroup\ --nocolor
 
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
+    " ag is fast enough that CtrlP doesn't need to cache
+    let g:ctrlp_use_caching = 0
 endif
 
 "-------------------------------"
@@ -118,10 +118,13 @@ colorscheme molokai
 " Show lines numbers
 set number
 
-"Enable filetypes
+" Enable filetypes
 filetype on
 filetype plugin on
 syntax on
+
+" Show trailing spaces
+set list listchars=trail:.,extends:>
 
 "-------------------------------"
 " Tabs
@@ -137,7 +140,7 @@ set expandtab
 "-------------------------------"
 " Code Folding
 "-------------------------------"
-set foldmethod=indent   
+set foldmethod=indent
 set foldlevelstart=9001
 
 "-------------------------------"
@@ -157,18 +160,16 @@ endfunction
 
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
-set list listchars=trail:.,extends:>
-
 "-------------------------------"
 " Other
 "-------------------------------"
 
 " Source the vimrc file after saving it. This way, you don't have to reload Vim to see the changes.
 if has("autocmd")
-	augroup myvimrchooks
-		au!
-		autocmd bufwritepost .vimrc source ~/.vimrc
-	augroup END
+    augroup myvimrchooks
+        au!
+        autocmd bufwritepost .vimrc source ~/.vimrc
+    augroup END
 endif
 
 " Automatically change current directory to that of the file in the buffer
