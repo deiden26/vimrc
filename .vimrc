@@ -103,6 +103,9 @@ nmap <leader>ut :UndotreeToggle <CR>
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
+" Shortcut for toggling row and column cursor highlighting
+nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
+
 "-------------------------------"
 " Appearence
 "-------------------------------"
@@ -136,6 +139,25 @@ set expandtab
 "-------------------------------"
 set foldmethod=indent   
 set foldlevelstart=9001
+
+"-------------------------------"
+" Strip Traling Whitespace on Save
+"-------------------------------"
+function! <SID>StripTrailingWhitespaces()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+set list listchars=trail:.,extends:>
 
 "-------------------------------"
 " Other
