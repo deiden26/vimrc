@@ -72,6 +72,9 @@ if executable('ag')
 
     " ag is fast enough that CtrlP doesn't need to cache
     let g:ctrlp_use_caching = 0
+
+    " Create command 'Ag' that works as ag within vim and opens a quickfix window
+    command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 endif
 
 "-------------------------------"
@@ -105,6 +108,9 @@ let g:ctrlp_cmd = 'CtrlP'
 
 " Shortcut for toggling row and column cursor highlighting
 nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
+
+" Search all files with backslash while in normal mode
+nnoremap \ :Ag<SPACE>
 
 "-------------------------------"
 " Appearence
@@ -172,5 +178,5 @@ if has("autocmd")
     augroup END
 endif
 
-" Automatically change current directory to that of the file in the buffer
-autocmd BufEnter * cd %:p:h
+" Close quickfix after selecting a file or line
+autocmd FileType qf nmap <buffer> <cr> <cr>:ccl<cr>
