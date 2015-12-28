@@ -19,7 +19,7 @@ Plug 'spf13/vim-autoclose'
 Plug 'tpope/vim-fugitive'
 Plug 'bling/vim-airline'
 Plug 'tomtom/tcomment_vim'
-Plug 'Shougo/neocomplcache.vim'
+Plug 'ervandew/supertab'
 Plug 'tomasr/molokai'
 Plug 'digitaltoad/vim-jade'
 Plug 'pangloss/vim-javascript'
@@ -35,12 +35,6 @@ call plug#end()
 "-------------------------------"
 " Plugin Options
 "-------------------------------"
-
-" Enable autocompletion
-let g:neocomplcache_enable_at_startup = 1
-
-" Enable tab to autocomplete
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Show hidden files in NerdTree
 let NERDTreeShowHidden=1
