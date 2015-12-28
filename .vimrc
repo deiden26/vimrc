@@ -108,7 +108,7 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
 " Shortcut for toggling row and column cursor highlighting
-nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
+nnoremap <Leader>h :set cursorline! cursorcolumn!<CR>
 
 " Search all files with backslash while in normal mode
 nmap <C-a> :LAg!<SPACE>
@@ -123,6 +123,23 @@ let g:multi_cursor_quit_key='<Esc>'
 " ctrlsf custom bindings
 nmap     <C-f> <Plug>CtrlSFPrompt
 vmap     <C-f> <Plug>CtrlSFVwordPath
+
+" split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Enable folding with the spacebar
+nnoremap <space> za
+
+" Copy and paste with mac clipboard
+nmap <Leader>v :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
+nmap <Leader>c :.w !pbcopy<CR><CR>
+vmap <Leader>c y:!echo<SPACE><C-R>"\|pbcopy<CR><CR>
+
+" Search for currently selected text
+vnoremap // y?<C-R>"<CR>
 
 "-------------------------------"
 " Appearence
