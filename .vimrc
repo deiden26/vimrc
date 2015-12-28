@@ -82,11 +82,6 @@ let g:ctrlsf_default_root = 'project'
 " Custom Key Bindings
 "-------------------------------"
 
-" Map escape key to ;;  -- much faster
-imap ;; <esc>
-" Map : to '' -- maybe faster?
-nmap '' <S-:>
-
 " Map paste toggle to F1
 set pastetoggle=<F1>
 
