@@ -26,6 +26,9 @@ Plug 'pangloss/vim-javascript'
 Plug 'wavded/vim-stylus'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'groenewege/vim-less'
+Plug 'rking/ag.vim'
+Plug 'dyng/ctrlsf.vim'
+Plug 'terryma/vim-multiple-cursors'
 
 call plug#end()
 
@@ -73,9 +76,13 @@ if executable('ag')
     " ag is fast enough that CtrlP doesn't need to cache
     let g:ctrlp_use_caching = 0
 
-    " Create command 'Ag' that works as ag within vim and opens a quickfix window
-    command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 endif
+
+" Ag search in project root directory
+let g:ag_working_path_mode="r"
+
+" ctrlsf search in project root directory
+let g:ctrlsf_default_root = 'project'
 
 "-------------------------------"
 " Custom Key Bindings
@@ -110,7 +117,18 @@ let g:ctrlp_cmd = 'CtrlP'
 nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
 
 " Search all files with backslash while in normal mode
-nnoremap \ :Ag<SPACE>
+nmap <C-a> :LAg!<SPACE>
+
+" Custom bindings for vim-multiple-cursors
+let g:multi_cursor_use_default_mapping=0
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<C-b>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
+
+" ctrlsf custom bindings
+nmap     <C-f> <Plug>CtrlSFPrompt
+vmap     <C-f> <Plug>CtrlSFVwordPath
 
 "-------------------------------"
 " Appearence
