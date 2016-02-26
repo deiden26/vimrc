@@ -30,6 +30,7 @@ Plug 'groenewege/vim-less'
 Plug 'rking/ag.vim'
 Plug 'dyng/ctrlsf.vim'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'hynek/vim-python-pep8-indent'
 
 call plug#end()
 
@@ -155,7 +156,7 @@ filetype plugin on
 syntax on
 
 " Show trailing spaces
-set list listchars=trail:.,extends:>
+set list listchars=tab:▷⋅,trail:⋅,nbsp:⋅
 
 "-------------------------------"
 " Tabs
