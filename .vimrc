@@ -31,6 +31,7 @@ Plug 'rking/ag.vim'
 Plug 'dyng/ctrlsf.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'hynek/vim-python-pep8-indent'
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
@@ -43,6 +44,11 @@ let NERDTreeShowHidden=1
 
 "Make syntastic work better with Angular
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
+
+" Syntastic settings
+let g:syntastic_aggregate_errors = 1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_mode_map =  { "mode": "passive", "active_filetypes": [], "passive_filetypes": [] }
 
 " Always use airline
 set laststatus=2
@@ -84,6 +90,9 @@ let g:ag_working_path_mode="r"
 
 " ctrlsf search in project root directory
 let g:ctrlsf_default_root = 'project'
+
+" Don't show git-gutter unless toggled
+let g:gitgutter_signs = 0
 
 "-------------------------------"
 " Custom Key Bindings
@@ -146,6 +155,12 @@ vnoremap // y?<C-R>"<CR>
 " Go back a tab
 nmap gr gT
 
+" Toggle git-gutter
+nmap <Leader>d :GitGutterSignsToggle<CR>
+
+" Check syntax
+nmap <Leader>s :SyntasticCheck<CR>
+
 "-------------------------------"
 " Appearence
 "-------------------------------"
@@ -203,14 +218,6 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 "-------------------------------"
 " Other
 "-------------------------------"
-
-" Source the vimrc file after saving it. This way, you don't have to reload Vim to see the changes.
-if has("autocmd")
-    augroup myvimrchooks
-        au!
-        autocmd bufwritepost .vimrc source ~/.vimrc
-    augroup END
-endif
 
 " Close quickfix after selecting a file or line
 autocmd FileType qf nmap <buffer> <cr> <cr>:ccl<cr>
