@@ -98,6 +98,10 @@ let g:gitgutter_signs = 0
 " Custom Key Bindings
 "-------------------------------"
 
+" j and k default to gj and gk unless a repeat number is given
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+
 " Map paste toggle to F1
 set pastetoggle=<F1>
 
@@ -170,8 +174,8 @@ set t_Co=256
 " Set colorscheme
 colorscheme molokai
 
-" Show lines numbers
-set number
+" Show relative lines numbers
+set relativenumber
 
 " Enable filetypes
 filetype on
