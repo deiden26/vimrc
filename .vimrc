@@ -27,6 +27,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'wavded/vim-stylus'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'groenewege/vim-less'
+Plug 'hail2u/vim-css3-syntax'
 Plug 'rking/ag.vim'
 Plug 'dyng/ctrlsf.vim'
 Plug 'terryma/vim-multiple-cursors'
@@ -225,3 +226,10 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
 " Close quickfix after selecting a file or line
 autocmd FileType qf nmap <buffer> <cr> <cr>:ccl<cr>
+
+" Fix css syntax highlighting for things such as vertical-align
+augroup VimCSS3Syntax
+  autocmd!
+
+  autocmd FileType css setlocal iskeyword+=-
+augroup END
