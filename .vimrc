@@ -33,6 +33,8 @@ Plug 'dyng/ctrlsf.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'airblade/vim-gitgutter'
+Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'elzr/vim-json'
 
 call plug#end()
 
@@ -99,6 +101,36 @@ let g:gitgutter_signs = 0
 " Custom Key Bindings
 "-------------------------------"
 
+" Change leader from \ to , (must be at top of binding definitions)
+let mapleader=","
+
+" Quickly select the text that was just pasted. This allows you to, e.g.,
+" indent it after pasting.
+noremap gV `[v`]
+
+" Stay in visual mode when indenting.
+vnoremap < <gv
+vnoremap > >gv
+
+" Make Y yank everything from the cursor to the end of the line.
+noremap Y y$
+
+" Make Ctrl-e jump to the end of the current line in the insert mode.
+inoremap <C-e> <C-o>$
+
+" Make Ctrl-a jump to the end of the current line in the insert mode.
+inoremap <C-a> <C-o>^
+
+" Allows you to easily replace the current word and all its occurrences.
+nmap <Leader>fr :%s/\<<C-r><C-w>\>/
+vmap <Leader>fr y:%s/<C-r>"/
+
+" Allows you to easily change the current word and all occurrences to something
+" else. The difference between this and the previous mapping is that the mapping
+" below pre-fills the current word for you to change.
+nmap <Leader>fc :%s/\<<C-r><C-w>\>/<C-r><C-w>
+vmap <Leader>fc y:%s/<C-r>"/<C-r>"
+
 " j and k default to gj and gk unless a repeat number is given
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
@@ -108,12 +140,6 @@ set pastetoggle=<F1>
 
 " Map fix indentation to F2
 map <F2> mzgg=G`z<CR>
-
-" Want a different map leader than \
-let mapleader=","
-
-" Shortcut to fold tags with leader (usually \) + ft
-nnoremap <leader>ft Vatzf
 
 " Shortcut for NERDTreeToggle
 nmap <leader>nt :NERDTreeToggle <CR>
@@ -158,7 +184,7 @@ vmap <Leader>c y:!echo<SPACE><C-R>"\|pbcopy<CR><CR>
 vnoremap // y?<C-R>"<CR>
 
 " Go back a tab
-nmap gr gT
+nmap gb gT
 
 " Toggle git-gutter
 nmap <Leader>d :GitGutterSignsToggle<CR>
