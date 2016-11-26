@@ -28,7 +28,7 @@ Plug 'wavded/vim-stylus'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'groenewege/vim-less'
 Plug 'hail2u/vim-css3-syntax'
-Plug 'rking/ag.vim'
+Plug 'mileszs/ack.vim'
 Plug 'dyng/ctrlsf.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'hynek/vim-python-pep8-indent'
@@ -86,10 +86,12 @@ if executable('ag')
     " ag is fast enough that CtrlP doesn't need to cache
     let g:ctrlp_use_caching = 0
 
+    let g:ackprg = 'ag --vimgrep --smart-case'
+
 endif
 
-" Ag search in project root directory
-let g:ag_working_path_mode="r"
+" Close the ack location list on enter
+let g:ack_autoclose=1
 
 " ctrlsf search in project root directory
 let g:ctrlsf_default_root = 'project'
@@ -153,7 +155,7 @@ let g:ctrlp_cmd = 'CtrlP'
 nnoremap <Leader>h :set cursorline! cursorcolumn!<CR>
 
 " Search all files with backslash while in normal mode
-nmap <C-a> :LAg!<SPACE>
+nmap <C-a> :LAck!<SPACE>
 
 " Custom bindings for vim-multiple-cursors
 let g:multi_cursor_use_default_mapping=0
@@ -249,6 +251,9 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 "-------------------------------"
 " Other
 "-------------------------------"
+
+" Allow backspace in insert mode
+set backspace=indent,eol,start
 
 " Close quickfix after selecting a file or line
 autocmd FileType qf nmap <buffer> <cr> <cr>:ccl<cr>
