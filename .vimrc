@@ -156,6 +156,8 @@ nnoremap <Leader>h :set cursorline! cursorcolumn!<CR>
 
 " Search all files with backslash while in normal mode
 nmap <C-a> :LAck!<SPACE>
+nmap <C-A> :LAck!<SPACE><C-r><C-w>
+vmap <C-A> y:LAck!<SPACE>'<C-r>"'
 
 " Custom bindings for vim-multiple-cursors
 let g:multi_cursor_use_default_mapping=0
