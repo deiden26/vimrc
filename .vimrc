@@ -93,6 +93,9 @@ endif
 " Close the ack location list on enter
 let g:ack_autoclose=1
 
+" Blank searches search current word under the cursor
+let g:ack_use_cword_for_empty_search=1
+
 " ctrlsf search in project root directory
 let g:ctrlsf_default_root = 'project'
 
