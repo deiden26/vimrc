@@ -193,10 +193,13 @@ vnoremap // y?<C-R>"<CR>
 nmap gb gT
 
 " Toggle git-gutter
-nmap <Leader>d :GitGutterSignsToggle<CR>
+nmap <Leader>g :GitGutterSignsToggle<CR>
 
 " Check syntax
 nmap <Leader>s :SyntasticCheck<CR>
+
+" Disable syntax error highlights
+nmap <Leader>d :SyntasticReset<CR>
 
 "-------------------------------"
 " Appearence
