@@ -35,6 +35,7 @@ Plug 'hynek/vim-python-pep8-indent'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'elzr/vim-json'
+Plug 'airblade/vim-rooter'
 
 call plug#end()
 
@@ -101,6 +102,9 @@ let g:ctrlsf_default_root = 'project'
 
 " Don't show git-gutter unless toggled
 let g:gitgutter_signs = 0
+
+" Stop vim-rooter echoing the project directory
+let g:rooter_silent_chdir = 1
 
 "-------------------------------"
 " Custom Key Bindings
@@ -231,6 +235,9 @@ set autoindent
 set tabstop=4
 set shiftwidth=4
 set expandtab
+
+" Change shiftwidth to 2 for less files
+au FileType less setlocal shiftwidth=2 tabstop=2
 
 "-------------------------------"
 " Code Folding
