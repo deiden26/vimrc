@@ -205,6 +205,9 @@ nmap <Leader>s :SyntasticCheck<CR>
 " Disable syntax error highlights
 nmap <Leader>d :SyntasticReset<CR>
 
+" Show location list of syntax errors
+nmap <Leader>e :Errors<CR>
+
 "-------------------------------"
 " Appearence
 "-------------------------------"
