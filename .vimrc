@@ -130,8 +130,11 @@ noremap Y y$
 " Make Ctrl-e jump to the end of the current line in the insert mode.
 inoremap <C-e> <C-o>$
 
-" Make Ctrl-a jump to the end of the current line in the insert mode.
+" Make Ctrl-a jump to the beginning of the current line in the insert mode.
 inoremap <C-a> <C-o>^
+
+" Make Ctrl-a jump to the beginning in command mode
+cnoremap <C-a> <Home>
 
 " Allows you to easily replace the current word and all its occurrences.
 nmap <Leader>fr :%s/\<<C-r><C-w>\>/
