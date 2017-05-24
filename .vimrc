@@ -113,9 +113,12 @@ let g:rooter_silent_chdir = 1
 " Change leader from \ to , (must be at top of binding definitions)
 let mapleader=","
 
-" Quickly select the text that was just pasted. This allows you to, e.g.,
-" indent it after pasting.
-noremap gV `[v`]
+" Remap standard incrementing & decrementing hotkeys
+" Use special character mappings instead of alt for macs
+nnoremap <A-a> <C-a>
+nnoremap å <C-a>
+nnoremap <A-x> <C-x>
+nnoremap ≈ <C-x>
 
 " Stay in visual mode when indenting.
 vnoremap < <gv
@@ -161,7 +164,7 @@ let g:ctrlp_cmd = 'CtrlP'
 " Shortcut for toggling row and column cursor highlighting
 nnoremap <Leader>h :set cursorline! cursorcolumn!<CR>
 
-" Search all files with backslash while in normal mode
+" Search all files
 nmap <C-a> :LAck!<SPACE>
 vmap <C-a> y:LAck!<SPACE>'<C-r>"'
 
@@ -173,8 +176,8 @@ let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
 " ctrlsf custom bindings
-nmap     <C-f> <Plug>CtrlSFPrompt
-vmap     <C-f> <Plug>CtrlSFVwordPath
+nmap <C-f> <Plug>CtrlSFPrompt
+vmap <C-f> <Plug>CtrlSFVwordPath
 
 " split navigations
 nnoremap <C-J> <C-W><C-J>
