@@ -197,7 +197,7 @@ nmap <Leader>c :.w !pbcopy<CR><CR>
 vmap <Leader>c y:!echo<SPACE><C-R>"\|pbcopy<CR><CR>
 
 " Search for currently selected text
-vnoremap // y?<C-R>"<CR>
+vnoremap // y/<C-R>"
 
 " Go back a tab
 nmap gb gT
