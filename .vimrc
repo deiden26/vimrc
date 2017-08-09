@@ -36,6 +36,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'elzr/vim-json'
 Plug 'airblade/vim-rooter'
+Plug 'MattesGroeger/vim-bookmarks'
 
 call plug#end()
 
@@ -105,6 +106,9 @@ let g:gitgutter_signs = 0
 
 " Stop vim-rooter echoing the project directory
 let g:rooter_silent_chdir = 1
+
+" Disable warning when toggling to clear a bookmark with annotation
+let g:bookmark_show_toggle_warning = 0
 
 "-------------------------------"
 " Custom Key Bindings
