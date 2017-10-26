@@ -192,6 +192,9 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" create blank vertical split
+nnoremap <C-W>m :vnew<CR>
+
 " Enable folding with the spacebar
 nnoremap <space> za
 
@@ -205,6 +208,9 @@ vnoremap // y/<C-R>"
 
 " Go back a tab
 nmap gb gT
+
+" Toggle git blame
+nmap <Leader>b :Gblame<CR>
 
 " Toggle git-gutter
 nmap <Leader>g :GitGutterSignsToggle<CR>
