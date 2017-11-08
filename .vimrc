@@ -244,6 +244,9 @@ syntax on
 " Show trailing spaces
 set list listchars=tab:▷⋅,trail:⋅,nbsp:⋅
 
+" Highlight lines over 72 characters in git commit
+:au FileType gitcommit syntax match ErrorMsg /\(^#.*\)\@<!\%>72v.\+/
+
 "-------------------------------"
 " Tabs
 "-------------------------------"
