@@ -224,6 +224,10 @@ nmap <Leader>d :SyntasticReset<CR>
 " Show location list of syntax errors
 nmap <Leader>e :Errors<CR>
 
+" Remap record key from 'q' to '!'
+nnoremap ! q
+nnoremap q <Nop>
+
 "-------------------------------"
 " Appearence
 "-------------------------------"
