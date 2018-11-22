@@ -57,6 +57,7 @@ let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming em
 let g:syntastic_aggregate_errors = 1
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_mode_map =  { "mode": "passive", "active_filetypes": [], "passive_filetypes": [] }
+let g:syntastic_typescript_checkers = ['tslint']
 
 " Always use airline
 set laststatus=2
