@@ -11,7 +11,6 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree'
-Plug 'mbbill/undotree'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/syntastic'
@@ -22,21 +21,25 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tomtom/tcomment_vim'
 Plug 'ervandew/supertab'
 Plug 'tomasr/molokai'
-Plug 'digitaltoad/vim-jade'
-Plug 'pangloss/vim-javascript'
-Plug 'wavded/vim-stylus'
-Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'groenewege/vim-less'
-Plug 'hail2u/vim-css3-syntax'
 Plug 'mileszs/ack.vim'
 Plug 'dyng/ctrlsf.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-scripts/ReplaceWithRegister'
-Plug 'elzr/vim-json'
 Plug 'airblade/vim-rooter'
 Plug 'MattesGroeger/vim-bookmarks'
+Plug 'editorconfig/editorconfig-vim'
+
+"Syntax Plugins"
+Plug 'leafgarland/typescript-vim'
+Plug 'elzr/vim-json'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'groenewege/vim-less'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'digitaltoad/vim-jade'
+Plug 'pangloss/vim-javascript'
+Plug 'wavded/vim-stylus'
 
 call plug#end()
 
@@ -60,19 +63,21 @@ set laststatus=2
 
 " Use airline for tab bar
 let g:airline#extensions#tabline#enabled = 1
-
+" Set airline to use powerline font symbols
+" https://github.com/powerline/fonts
+let g:airline_powerline_fonts = 1
 " Set airline to use unicode symbols
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-let g:airline_right_sep = '◀'
-let g:airline_left_sep = '▶'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.whitespace = 'Ξ'
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = ' | '
+" if !exists('g:airline_symbols')
+"     let g:airline_symbols = {}
+" endif
+" let g:airline_right_sep = '◀'
+" let g:airline_left_sep = '▶'
+" let g:airline_symbols.linenr = '¶'
+" let g:airline_symbols.branch = '⎇'
+" let g:airline_symbols.paste = 'ρ'
+" let g:airline_symbols.whitespace = 'Ξ'
+" let g:airline#extensions#tabline#left_sep = ' '
+" let g:airline#extensions#tabline#left_alt_sep = ' | '
 
 " Set cltp's working director to first parent with .git or the directory of the current file
 let g:ctrlp_working_path_mode = 'ra'
