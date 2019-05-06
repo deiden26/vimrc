@@ -251,7 +251,7 @@ nmap <Leader>g :GitGutterSignsToggle<CR>
 nmap <Leader>s :SyntasticCheck<CR>
 
 " Disable syntax error highlights
-nmap <Leader>d :SyntasticReset<CR>
+nmap <Leader>sd :SyntasticReset<CR>
 
 " Show location list of syntax errors
 nmap <Leader>e :Errors<CR>
@@ -259,6 +259,15 @@ nmap <Leader>e :Errors<CR>
 " Remap record key from 'q' to '!'
 nnoremap ! q
 nnoremap q <Nop>
+
+" Delete without polluting the volatile register by default
+" Use leader to cut
+nnoremap d "_d
+xnoremap d "_d
+nnoremap D "_D
+nnoremap <leader>d d
+xnoremap <leader>d d
+nnoremap <leader>D D
 
 "-------------------------------"
 " Appearence
@@ -270,6 +279,7 @@ set t_Co=256
 colorscheme molokai
 
 " Show relative lines numbers
+set number
 set relativenumber
 
 " Enable filetypes
