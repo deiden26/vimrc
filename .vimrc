@@ -25,7 +25,7 @@ Plug 'mileszs/ack.vim'
 Plug 'dyng/ctrlsf.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'hynek/vim-python-pep8-indent'
-Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter', {'on': 'GitGutterSignsToggle'}
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'airblade/vim-rooter'
 Plug 'MattesGroeger/vim-bookmarks'
