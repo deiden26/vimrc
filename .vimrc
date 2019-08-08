@@ -30,6 +30,7 @@ Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'airblade/vim-rooter'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'whiteinge/diffconflicts'
 
 "Syntax Plugins"
 Plug 'leafgarland/typescript-vim'
