@@ -10,37 +10,43 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-surround'
-Plug 'scrooloose/syntastic'
-Plug 'spf13/vim-autoclose'
+Plug 'tpope/vim-endwise', { 'for': 'ruby' }
+Plug 'dense-analysis/ale'
+Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'tomtom/tcomment_vim'
-Plug 'ervandew/supertab'
+Plug 'tpope/vim-commentary'
 Plug 'tomasr/molokai'
 Plug 'mileszs/ack.vim'
 Plug 'dyng/ctrlsf.vim'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'hynek/vim-python-pep8-indent'
 Plug 'airblade/vim-gitgutter', {'on': 'GitGutterSignsToggle'}
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'airblade/vim-rooter'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'whiteinge/diffconflicts'
+Plug 'Valloric/ListToggle'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-rails'
 
 "Syntax Plugins"
-Plug 'leafgarland/typescript-vim'
-Plug 'elzr/vim-json'
-Plug 'hail2u/vim-css3-syntax'
-Plug 'groenewege/vim-less'
-Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'digitaltoad/vim-jade'
-Plug 'pangloss/vim-javascript'
-Plug 'wavded/vim-stylus'
+Plug 'sheerun/vim-polyglot'
+Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }
+Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
+
+" Neovim-specific behavior
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc', { 'do': 'python3 -m pip install pynvim' }
+endif
 
 call plug#end()
 
@@ -51,15 +57,36 @@ call plug#end()
 " Show hidden files in NerdTree
 let NERDTreeShowHidden=1
 
-"Make syntastic work better with Angular
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
+" JSX Pretty Settings
+let g:vim_jsx_pretty_colorful_config = 1
 
-" Syntastic settings
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_mode_map =  { "mode": "passive", "active_filetypes": [], "passive_filetypes": [] }
-let g:syntastic_typescript_checkers = ['tslint']
-let g:syntastic_javascript_checkers = ['jshint', 'eslint']
+" ALE Settings
+" Work with Airline
+let g:airline#extensions#ale#enabled = 1
+" Never run the linter until asked
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_save = 0
+let g:ale_lint_on_filetype_changed = 0
+
+" Deoplete Settings
+let g:deoplete#enable_at_startup = 1
+" Don't show scratch window if info
+set completeopt-=preview
+" Tab to complete
+inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+" Set completion engines
+if exists('deoplete#custom#option')
+    call deoplete#custom#option('sources', {
+    \ '_': ['ale', 'around', 'buffer', 'file'],
+    \})
+endif
+
+" For auto completion Install...
+" - rubocop & solargraph (ruby)
+" - tsserver (JS, TS)
 
 " Always use airline
 set laststatus=2
@@ -248,14 +275,16 @@ nmap <Leader>b :Gblame<CR>
 " Toggle git-gutter
 nmap <Leader>g :GitGutterSignsToggle<CR>
 
-" Check syntax
-nmap <Leader>s :SyntasticCheck<CR>
-
-" Disable syntax error highlights
-nmap <Leader>sd :SyntasticReset<CR>
-
-" Show location list of syntax errors
-nmap <Leader>e :Errors<CR>
+" ALE Check syntax
+nmap <Leader>s :ALELint<CR>
+" Disable syntax error highlights and close the location list
+nmap <Leader>sd :lclose<CR>:ALEResetBuffer<CR>
+" Go to next error
+nmap <Leader>sj <Plug>(ale_next_wrap)
+" Go to previous error
+nmap <Leader>sk <Plug>(ale_previous_wrap)
+" Show location list of Syntastic syntax errors
+nmap <Leader>e :LToggle<CR>
 
 " Remap record key from 'q' to '!'
 nnoremap ! q
@@ -311,7 +340,7 @@ au FileType less setlocal shiftwidth=2 tabstop=2
 "-------------------------------"
 " Code Folding
 "-------------------------------"
-set foldmethod=indent
+set foldmethod=syntax
 set foldlevelstart=9001
 
 "-------------------------------"
