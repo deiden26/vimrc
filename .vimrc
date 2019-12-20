@@ -8,6 +8,15 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+" Long update hooks
+let diffconflicts_hook = join([
+\"git config --global merge.tool diffconflicts\n",
+\"git config --global mergetool.diffconflicts.cmd\n",
+\"git config --global mergetool.diffconflicts.cmd 'vim -c DiffConflicts \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"'\n",
+\"git config --global mergetool.diffconflicts.trustExitCode true\n",
+\"git config --global mergetool.keepBackup false"
+\])
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -29,15 +38,18 @@ Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'airblade/vim-rooter'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'whiteinge/diffconflicts'
+Plug 'whiteinge/diffconflicts', {'do': diffconflicts_hook}
 Plug 'Valloric/ListToggle'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-rails'
+Plug 'tpope/vim-dispatch'
+Plug 'Konfekt/FastFold'
 
 "Syntax Plugins"
 Plug 'sheerun/vim-polyglot'
 Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }
 Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
+Plug 'styled-components/vim-styled-components', { 'branch': 'main', 'for': 'js' }
 
 " Neovim-specific behavior
 if has('nvim')
@@ -47,6 +59,8 @@ else
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc', { 'do': 'python3 -m pip install pynvim' }
 endif
+
+" deoplete, vim-rails, and polygot are causing issues
 
 call plug#end()
 
@@ -60,6 +74,9 @@ let NERDTreeShowHidden=1
 " JSX Pretty Settings
 let g:vim_jsx_pretty_colorful_config = 1
 
+" vim-javascript Settings
+let g:javascript_plugin_flow = 1
+
 " ALE Settings
 " Work with Airline
 let g:airline#extensions#ale#enabled = 1
@@ -69,6 +86,9 @@ let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_enter = 0
 let g:ale_lint_on_save = 0
 let g:ale_lint_on_filetype_changed = 0
+let g:ale_linters= {
+\    'javascript': ['eslint', 'flow-language-server'],
+\}
 
 " Deoplete Settings
 let g:deoplete#enable_at_startup = 1
@@ -78,10 +98,13 @@ set completeopt-=preview
 inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
 " Set completion engines
-if exists('deoplete#custom#option')
-    call deoplete#custom#option('sources', {
-    \ '_': ['ale', 'around', 'buffer', 'file'],
-    \})
+if &rtp =~ 'deoplete'
+  call deoplete#custom#option({
+    \'sources': {
+      \'_': ['ale', 'around', 'buffer', 'file'],
+    \},
+    \'auto_complete_delay': 200,
+  \})
 endif
 
 " For auto completion Install...
@@ -330,18 +353,17 @@ filetype indent on
 filetype plugin indent on
 set autoindent
 
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set expandtab
-
-" Change shiftwidth to 2 for less files
-au FileType less setlocal shiftwidth=2 tabstop=2
 
 "-------------------------------"
 " Code Folding
 "-------------------------------"
-set foldmethod=syntax
+set foldmethod=indent
 set foldlevelstart=9001
+" Use syntax folding for JS files in case they contain JSX
+au FileType js setlocal foldmethod=syntax
 
 "-------------------------------"
 " Strip Traling Whitespace on Save
@@ -376,3 +398,20 @@ augroup VimCSS3Syntax
 
   autocmd FileType css setlocal iskeyword+=-
 augroup END
+
+" Use rbenv's ruby version, if rbenv is present
+if system('command -v rbenv') =~ 'rbenv'
+  let g:ruby_path = system('echo $HOME/.rbenv/shims')
+endif
+
+" Matchit support:
+runtime macros/matchit.vim
+if exists("loaded_matchit")
+  let g:test=1
+  if !exists("b:match_words")
+    let b:match_ignorecase = 0
+    let b:match_words =
+\ '\%(\%(\%(^\|[;=]\)\s*\)\@<=\%(class\|module\|while\|begin\|until\|for\|if\|unless\|def\|case\)\|\<do\)\>:' .
+\ '\<\%(else\|elsif\|ensure\|rescue\|when\)\>:\%(^\|[^.]\)\@<=\<end\>'
+  endif
+endif
