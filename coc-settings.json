@@ -1,0 +1,11 @@
+{
+  "diagnostic.errorSign": "⌦",
+  "diagnostic.infoSign": "⚙︎",
+
+  "solargraph.diagnostics": true,
+  "solargraph.formatting": true,
+  "solargraph.hover": true,
+
+  "typescript.validate.enable": false,
+  "javascript.validate.enable": false
+}

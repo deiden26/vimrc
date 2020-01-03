@@ -23,7 +23,6 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-endwise', { 'for': 'ruby' }
-Plug 'dense-analysis/ale'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
@@ -44,6 +43,9 @@ Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-dispatch'
 Plug 'Konfekt/FastFold'
+Plug 'romainl/vim-cool'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
 "Syntax Plugins"
 Plug 'sheerun/vim-polyglot'
@@ -51,69 +53,50 @@ Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }
 Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
 Plug 'styled-components/vim-styled-components', { 'branch': 'main', 'for': 'js' }
 
-" Neovim-specific behavior
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc', { 'do': 'python3 -m pip install pynvim' }
-endif
-
-" deoplete, vim-rails, and polygot are causing issues
-
 call plug#end()
 
 "-------------------------------"
 " Plugin Options
 "-------------------------------"
 
-" Show hidden files in NerdTree
+"~~ Show hidden files in NerdTree ~~"
 let NERDTreeShowHidden=1
 
-" JSX Pretty Settings
+"~~ JSX Pretty Settings ~~"
 let g:vim_jsx_pretty_colorful_config = 1
 
-" vim-javascript Settings
+"~~ vim-javascript Settings ~~"
 let g:javascript_plugin_flow = 1
 
-" ALE Settings
-" Work with Airline
-let g:airline#extensions#ale#enabled = 1
-" Never run the linter until asked
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_insert_leave = 0
-let g:ale_lint_on_enter = 0
-let g:ale_lint_on_save = 0
-let g:ale_lint_on_filetype_changed = 0
-let g:ale_linters= {
-\    'javascript': ['eslint', 'flow-language-server'],
-\}
+"~~ Coc Settings ~~"
+" List of extensions
+let g:coc_global_extensions = [
+\  'coc-json',
+\  'coc-tsserver',
+\  'coc-eslint',
+\  'coc-html',
+\  'coc-css',
+\  'coc-solargraph',
+\  'coc-python',
+\  'coc-flow',
+\]
+" if hidden is not set, TextEdit might fail.
+set hidden
+" Some servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
+" Better display for messages
+set cmdheight=2
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+" always show signcolumns
+set signcolumn=yes
 
-" Deoplete Settings
-let g:deoplete#enable_at_startup = 1
-" Don't show scratch window if info
-set completeopt-=preview
-" Tab to complete
-inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
-" Set completion engines
-if &rtp =~ 'deoplete'
-  call deoplete#custom#option({
-    \'sources': {
-      \'_': ['ale', 'around', 'buffer', 'file'],
-    \},
-    \'auto_complete_delay': 200,
-  \})
-endif
-
-" For auto completion Install...
-" - rubocop & solargraph (ruby)
-" - tsserver (JS, TS)
-
+"~~ Airline Settings ~~"
 " Always use airline
 set laststatus=2
-
 " Use airline for tab bar
 let g:airline#extensions#tabline#enabled = 1
 " Set airline to use powerline font symbols
@@ -132,9 +115,9 @@ let g:airline_powerline_fonts = 1
 " let g:airline#extensions#tabline#left_sep = ' '
 " let g:airline#extensions#tabline#left_alt_sep = ' | '
 
+"~~ CtrlP Settings ~~"
 " Set cltp's working director to first parent with .git or the directory of the current file
 let g:ctrlp_working_path_mode = 'ra'
-
 " Use Silver Searcher for grep and cltp
 if executable('ag')
     " Use ag over grep
@@ -298,17 +281,6 @@ nmap <Leader>b :Gblame<CR>
 " Toggle git-gutter
 nmap <Leader>g :GitGutterSignsToggle<CR>
 
-" ALE Check syntax
-nmap <Leader>s :ALELint<CR>
-" Disable syntax error highlights and close the location list
-nmap <Leader>sd :lclose<CR>:ALEResetBuffer<CR>
-" Go to next error
-nmap <Leader>sj <Plug>(ale_next_wrap)
-" Go to previous error
-nmap <Leader>sk <Plug>(ale_previous_wrap)
-" Show location list of Syntastic syntax errors
-nmap <Leader>e :LToggle<CR>
-
 " Remap record key from 'q' to '!'
 nnoremap ! q
 nnoremap q <Nop>
@@ -321,6 +293,54 @@ nnoremap D "_D
 nnoremap <leader>d d
 xnoremap <leader>d d
 nnoremap <leader>D D
+
+" Show location list of Coc syntax errors
+nmap <Leader>e :LToggle<CR>
+
+" Coc gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Rename current word using Coc
+nmap <leader>rn <Plug>(coc-rename)
+
+" Format selected region using Coc
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+" Format entire buffer using Coc
+nmap <leader>fa <Plug>(coc-format)
+
+" Fix autofix problem of current line using Coc
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Use tab for trigger completion with characters ahead and navigate. (Coc)
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Go to next Coc diagnostic
+nmap <Leader>dj <Plug>(coc-diagnostic-next)
+" " Go to previous Coc diagnostic
+nmap <Leader>dk <Plug>(coc-diagnostic-prev)
+
+" Preview Markdown
+nmap <leader>pm <Plug>MarkdownPreviewToggle
+
+"-------------------------------"
+" Commands
+"-------------------------------"
+" Remove unintentional bindings
+command FixScroll set noscrollbind | set nocursorbind
 
 "-------------------------------"
 " Appearence
