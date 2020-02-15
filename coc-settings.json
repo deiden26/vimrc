@@ -1,10 +1,17 @@
 {
-  "diagnostic.errorSign": "⌦",
-  "diagnostic.infoSign": "⚙︎",
+  "diagnostic.errorSign": "𝗫",
+  "diagnostic.warningSign": "▲",
+  "diagnostic.infoSign": "●",
+  "diagnostic.enable": true,
 
   "solargraph.diagnostics": true,
   "solargraph.formatting": true,
   "solargraph.hover": true,
+  "solargraph.checkGemVersion": false,
+  "solargraph.completion": true,
+  "solargraph.definitions": true,
+  "solargraph.rename": true,
+  "solargraph.references": true,
 
   "typescript.validate.enable": false,
   "javascript.validate.enable": false

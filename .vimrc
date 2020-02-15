@@ -30,8 +30,9 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-commentary'
 Plug 'tomasr/molokai'
 Plug 'mileszs/ack.vim'
+Plug 'jremmen/vim-ripgrep'
 Plug 'dyng/ctrlsf.vim'
-Plug 'terryma/vim-multiple-cursors'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'airblade/vim-gitgutter', {'on': 'GitGutterSignsToggle'}
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'airblade/vim-rooter'
@@ -42,10 +43,13 @@ Plug 'Valloric/ListToggle'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-eunuch'
 Plug 'Konfekt/FastFold'
 Plug 'romainl/vim-cool'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+Plug 'ryanoasis/vim-devicons'
+Plug 'Yggdroot/indentLine'
 
 "Syntax Plugins"
 Plug 'sheerun/vim-polyglot'
@@ -68,12 +72,17 @@ let g:vim_jsx_pretty_colorful_config = 1
 "~~ vim-javascript Settings ~~"
 let g:javascript_plugin_flow = 1
 
+
+"~~  vim-styled-components settings ~~"
+" Fix syntax highlighting in long JS files
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+
 "~~ Coc Settings ~~"
 " List of extensions
 let g:coc_global_extensions = [
 \  'coc-json',
-\  'coc-tsserver',
 \  'coc-eslint',
+\  'coc-tsserver',
 \  'coc-html',
 \  'coc-css',
 \  'coc-solargraph',
@@ -118,19 +127,27 @@ let g:airline_powerline_fonts = 1
 "~~ CtrlP Settings ~~"
 " Set cltp's working director to first parent with .git or the directory of the current file
 let g:ctrlp_working_path_mode = 'ra'
+" Use ripgrep for grep and cltp
+if executable('rg')
+  " Use ripgrep over grep
+  set grepprg=rg\ --color=never
+  " Use ripgrep in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+  " ripgrep is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
 " Use Silver Searcher for grep and cltp
-if executable('ag')
+elseif executable('ag')
     " Use ag over grep
-    set grepprg=ag\ --nogroup\ --nocolor
-
+    set grepprg=ag\ --nogroup\ --nocolor-
     " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'-
     " ag is fast enough that CtrlP doesn't need to cache
-    let g:ctrlp_use_caching = 0
-
+    let g:ctrlp_use_caching = 0-
     let g:ackprg = 'ag --vimgrep --smart-case'
+endif
 
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
 endif
 
 " Close the ack location list on enter
@@ -175,6 +192,15 @@ function! BookmarkUnmapKeys()
     unmap mjj
 endfunction
 let g:ctrlp_buffer_func ={'enter': 'BookmarkUnmapKeys','exit': 'BookmarkMapKeys'}
+
+
+"~~ Vim Devicons Settings ~~"
+set encoding=UTF-8
+
+"~~ indentLine Settings ~~"
+let g:indentLine_char = '▏'
+" Don't hide characters like backticks in markdown docs
+autocmd BufNewFile,BufRead *.md let indentLine_setConceal=0
 
 "-------------------------------"
 " Custom Key Bindings
@@ -241,12 +267,9 @@ nnoremap <Leader>h :set cursorline! cursorcolumn!<CR>
 nmap <C-a> :LAck!<SPACE>
 vmap <C-a> y:LAck!<SPACE>'<C-r>"'
 
-" Custom bindings for vim-multiple-cursors
-let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_next_key='<C-n>'
-let g:multi_cursor_prev_key='<C-b>'
-let g:multi_cursor_skip_key='<C-x>'
-let g:multi_cursor_quit_key='<Esc>'
+let g:VM_maps = {}
+let g:VM_maps['Skip Region'] = '<C-s>'
+let g:VM_maps['Remove Region'] = '<C-b>'
 
 " ctrlsf custom bindings
 nmap <C-f> <Plug>CtrlSFPrompt
@@ -294,7 +317,7 @@ nnoremap <leader>d d
 xnoremap <leader>d d
 nnoremap <leader>D D
 
-" Show location list of Coc syntax errors
+" Show location list of Coc diagnostics
 nmap <Leader>e :LToggle<CR>
 
 " Coc gotos
@@ -345,9 +368,6 @@ command FixScroll set noscrollbind | set nocursorbind
 "-------------------------------"
 " Appearence
 "-------------------------------"
-" Use 256 colors
-set t_Co=256
-
 " Set colorscheme
 colorscheme molokai
 
@@ -365,6 +385,9 @@ set list listchars=tab:▷⋅,trail:⋅,nbsp:⋅
 
 " Highlight lines over 72 characters in git commit
 :au FileType gitcommit syntax match ErrorMsg /\(^#.*\)\@<!\%>72v.\+/
+
+" Change search highlight color
+highlight Search ctermbg=Black ctermfg=white
 
 "-------------------------------"
 " Tabs
