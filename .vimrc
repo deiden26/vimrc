@@ -56,6 +56,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }
 Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
 Plug 'styled-components/vim-styled-components', { 'branch': 'main', 'for': 'js' }
+Plug 'zinit-zsh/zinit-vim-syntax'
 
 call plug#end()
 
@@ -316,9 +317,18 @@ nnoremap D "_D
 nnoremap <leader>d d
 xnoremap <leader>d d
 nnoremap <leader>D D
-
-" Show location list of Coc diagnostics
-nmap <Leader>e :LToggle<CR>
+" Toggle location list of Coc diagnostics
+nmap <Leader>e :call ToggleDiagnostics()<CR>
+" let s:shown = 0
+function! ToggleDiagnostics()
+  if get(s:, 'shown', 0)
+    silent! lclose
+    let s:shown = 0
+  else
+    let s:shown = 1
+    execute 'CocDiagnostics'
+  endif
+endfunction
 
 " Coc gotos
 nmap <silent> gd <Plug>(coc-definition)
@@ -450,7 +460,6 @@ endif
 " Matchit support:
 runtime macros/matchit.vim
 if exists("loaded_matchit")
-  let g:test=1
   if !exists("b:match_words")
     let b:match_ignorecase = 0
     let b:match_words =
