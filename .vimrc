@@ -57,6 +57,7 @@ Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }
 Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
 Plug 'styled-components/vim-styled-components', { 'branch': 'main', 'for': 'js' }
 Plug 'zinit-zsh/zinit-vim-syntax'
+Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
 
 call plug#end()
 
@@ -385,6 +386,9 @@ colorscheme molokai
 set number
 set relativenumber
 
+" Always show at least 5 lines above / below the cursor
+set scrolloff=5
+
 " Enable filetypes
 filetype on
 filetype plugin on
@@ -398,6 +402,20 @@ set list listchars=tab:▷⋅,trail:⋅,nbsp:⋅
 
 " Change search highlight color
 highlight Search ctermbg=Black ctermfg=white
+
+" YARD highlighting
+" Note: run `:so $VIMRUNTIME/syntax/hitest.vim` for list of
+" highlighting groups
+hi link yardType Type
+hi link yardTypeList Type
+hi link yardLiteral Type
+hi link yardParamName SpecialComment
+hi link yardParam String
+hi link yardOption String
+hi link yardReturn Macro
+hi link yardExample Title
+hi link yardGenericTag Tag
+hi link yardDeprecated Error
 
 "-------------------------------"
 " Tabs
