@@ -370,6 +370,9 @@ nmap <Leader>dk <Plug>(coc-diagnostic-prev)
 " Preview Markdown
 nmap <leader>pm <Plug>MarkdownPreviewToggle
 
+" Reset syntax highlighting in a buffer
+noremap <leader>sr <Esc>:syntax sync fromstart<CR>
+
 "-------------------------------"
 " Commands
 "-------------------------------"
