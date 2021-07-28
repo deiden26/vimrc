@@ -365,8 +365,14 @@ endfunction
 
 " Go to next Coc diagnostic
 nmap <Leader>dj <Plug>(coc-diagnostic-next)
-" " Go to previous Coc diagnostic
+" Go to previous Coc diagnostic
 nmap <Leader>dk <Plug>(coc-diagnostic-prev)
+
+" Scroll through Coc hint floating window
+nnoremap <nowait><expr> <C-s> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-s>"
+nnoremap <nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
+inoremap <nowait><expr> <C-s> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+inoremap <nowait><expr> <C-u> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
 
 " Preview Markdown
 nmap <leader>pm <Plug>MarkdownPreviewToggle
