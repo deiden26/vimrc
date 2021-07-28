@@ -42,6 +42,7 @@ Plug 'whiteinge/diffconflicts', {'do': diffconflicts_hook}
 Plug 'Valloric/ListToggle'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-rails'
+Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch'
 Plug 'Konfekt/FastFold'
