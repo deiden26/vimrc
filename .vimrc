@@ -380,6 +380,9 @@ nmap <leader>pm <Plug>MarkdownPreviewToggle
 " Reset syntax highlighting in a buffer
 noremap <leader>sr <Esc>:syntax sync fromstart<CR>
 
+" Exit terminal mode
+tnoremap <leader><Esc> <C-\><C-n>
+
 "-------------------------------"
 " Commands
 "-------------------------------"
