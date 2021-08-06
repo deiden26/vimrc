@@ -20,7 +20,6 @@ let diffconflicts_hook = join([
 call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-endwise', { 'for': 'ruby' }
 Plug 'jiangmiao/auto-pairs'
@@ -29,8 +28,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-commentary'
 Plug 'tomasr/molokai'
-Plug 'mileszs/ack.vim'
-Plug 'jremmen/vim-ripgrep'
 Plug 'dyng/ctrlsf.vim'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'airblade/vim-gitgutter', {'on': 'GitGutterSignsToggle'}
@@ -51,6 +48,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'ryanoasis/vim-devicons'
 Plug 'Yggdroot/indentLine'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 "Syntax Plugins"
 Plug 'sheerun/vim-polyglot'
@@ -127,40 +126,24 @@ let g:airline_powerline_fonts = 1
 " let g:airline#extensions#tabline#left_sep = ' '
 " let g:airline#extensions#tabline#left_alt_sep = ' | '
 
-"~~ CtrlP Settings ~~"
-" Set cltp's working director to first parent with .git or the directory of the current file
-let g:ctrlp_working_path_mode = 'ra'
-" Use ripgrep for grep and cltp
+" Use ripgrep for grep
 if executable('rg')
-  " Use ripgrep over grep
-  set grepprg=rg\ --color=never
-  " Use ripgrep in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-  " ripgrep is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-" Use Silver Searcher for grep and cltp
+  set grepprg=rg\ --vimgrep\ --smart-case
+" Use Silver Searcher for grep
 elseif executable('ag')
-    " Use ag over grep
     set grepprg=ag\ --nogroup\ --nocolor-
-    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'-
-    " ag is fast enough that CtrlP doesn't need to cache
-    let g:ctrlp_use_caching = 0-
-    let g:ackprg = 'ag --vimgrep --smart-case'
 endif
 
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
+" Replace the default fzf ripgrep command with one that accepts flags
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
+  let command = printf(command_fmt, a:query)
+  call fzf#vim#grep(command, 1, fzf#vim#with_preview(), a:fullscreen)
+endfunction
+command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
 
-" Close the ack location list on enter
-let g:ack_autoclose=1
-
-" Blank searches search current word under the cursor
-let g:ack_use_cword_for_empty_search=1
-
-" ctrlsf search in project root directory
-let g:ctrlsf_default_root = 'project'
+" Store previous fzf searches
+let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 " Don't show git-gutter unless toggled
 let g:gitgutter_signs = 0
@@ -170,31 +153,6 @@ let g:rooter_silent_chdir = 1
 
 " Disable warning when toggling to clear a bookmark with annotation
 let g:bookmark_show_toggle_warning = 0
-
-" Disable bookmarks when in CtrlP
-function! BookmarkMapKeys()
-    nmap mm :BookmarkToggle<CR>
-    nmap mi :BookmarkAnnotate<CR>
-    nmap mn :BookmarkNext<CR>
-    nmap mp :BookmarkPrev<CR>
-    nmap ma :BookmarkShowAll<CR>
-    nmap mc :BookmarkClear<CR>
-    nmap mx :BookmarkClearAll<CR>
-    nmap mkk :BookmarkMoveUp
-    nmap mjj :BookmarkMoveDown
-endfunction
-function! BookmarkUnmapKeys()
-    unmap mm
-    unmap mi
-    unmap mn
-    unmap mp
-    unmap ma
-    unmap mc
-    unmap mx
-    unmap mkk
-    unmap mjj
-endfunction
-let g:ctrlp_buffer_func ={'enter': 'BookmarkUnmapKeys','exit': 'BookmarkMapKeys'}
 
 
 "~~ Vim Devicons Settings ~~"
@@ -259,16 +217,24 @@ map <F2> mzgg=G`z<CR>
 nmap <leader>nt :NERDTreeToggle <CR>
 nmap <leader>ut :UndotreeToggle <CR>
 
-" Change the default mapping and the default command to invoke CtrlP:CtrlP
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-
 " Shortcut for toggling row and column cursor highlighting
 nnoremap <Leader>h :set cursorline! cursorcolumn!<CR>
 
-" Search all files
-nmap <C-a> :LAck!<SPACE>
-vmap <C-a> y:LAck!<SPACE>'<C-r>"'
+" Search all files with fzf
+nnoremap <silent> <C-p> :Files<CR>
+
+" Search all file text with ripgrep and fzf
+nnoremap <C-a> :Rg<SPACE>
+vnoremap <C-a> y:Rg<SPACE>'<C-r>"'
+
+" Add preview scroll bindings for fzf
+let $FZF_DEFAULT_OPTS=join([
+\"--bind ",
+\"up:preview-up,",
+\"down:preview-down,",
+\"shift-up:preview-page-up,",
+\"shift-down:preview-page-down",
+\], '')
 
 let g:VM_maps = {}
 let g:VM_maps['Skip Region'] = '<C-s>'
