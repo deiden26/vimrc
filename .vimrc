@@ -88,7 +88,7 @@ let g:coc_global_extensions = [
 \  'coc-html',
 \  'coc-css',
 \  'coc-solargraph',
-\  'coc-python',
+\  'coc-pyright',
 \  'coc-flow',
 \]
 " if hidden is not set, TextEdit might fail.
@@ -287,7 +287,6 @@ xnoremap <leader>d d
 nnoremap <leader>D D
 " Toggle location list of Coc diagnostics
 nmap <Leader>e :call ToggleDiagnostics()<CR>
-" let s:shown = 0
 function! ToggleDiagnostics()
   if get(s:, 'shown', 0)
     silent! lclose
