@@ -268,7 +268,7 @@ vnoremap // y/<C-R>"
 nmap gb gT
 
 " Toggle git blame
-nmap <Leader>b :Gblame<CR>
+nmap <Leader>b :Git blame<CR>
 
 " Toggle git-gutter
 nmap <Leader>g :GitGutterSignsToggle<CR>
