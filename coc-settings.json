@@ -2,6 +2,7 @@
   "diagnostic.errorSign": "𝗫",
   "diagnostic.warningSign": "▲",
   "diagnostic.infoSign": "●",
+  "diagnostic.hintSign": "⊙",
   "diagnostic.enable": true,
 
   "solargraph.diagnostics": true,
@@ -17,6 +18,5 @@
   "typescript.validate.enable": false,
   "javascript.validate.enable": false,
 
-  "python.linting.pylintEnabled": false,
-  "python.linting.prospectorEnabled": true
+  "python.linting.flake8Enabled": true,
 }
