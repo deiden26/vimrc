@@ -50,6 +50,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
 "Syntax Plugins"
 Plug 'sheerun/vim-polyglot'
@@ -60,6 +61,18 @@ Plug 'zinit-zsh/zinit-vim-syntax'
 Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
 
 call plug#end()
+
+"-------------------------------"
+" Constants
+"-------------------------------"
+
+" Record whether or not the terminal and the vim version supports true, 24 bit color
+let _ = system('[[ $COLORTERM =~ ^(truecolor|24bit)$ ]]')
+if (has("termguicolors") && v:shell_error == 0)
+  let g:supports_true_color = 1
+else
+  let g:supports_true_color = 0
+endif
 
 "-------------------------------"
 " Plugin Options
@@ -162,6 +175,21 @@ set encoding=UTF-8
 let g:indentLine_char = '▏'
 " Don't hide characters like backticks in markdown docs
 autocmd BufNewFile,BufRead *.md let indentLine_setConceal=0
+
+"~~ Hexokinase Settings ~~"
+" Turn off Hexokinase if 24 bit true color is not supported
+if (!g:supports_true_color)
+  autocmd BufNewFile,BufRead * HexokinaseTurnOff
+endif
+
+" Files in which to show color previews for values that look like colors
+let g:Hexokinase_ftEnabled = ['css', 'scss', 'html', 'javascript']
+
+" Don't preview colors for color names in javascript. Large possibility for
+" false positives
+let g:Hexokinase_ftOptInPatterns = {
+\     'javascript': 'full_hex,triple_hex,rgb,rgba,hsl,hsla',
+\ }
 
 "-------------------------------"
 " Custom Key Bindings
@@ -360,6 +388,11 @@ command FixScroll set noscrollbind | set nocursorbind
 " Set colorscheme
 colorscheme molokai
 
+" Use true, full 24bit color if possible
+if (g:supports_true_color)
+  set termguicolors
+endif
+
 " Show relative lines numbers
 set number
 set relativenumber
@@ -387,7 +420,7 @@ highlight Search ctermbg=Black ctermfg=white
 hi link yardType Type
 hi link yardTypeList Type
 hi link yardLiteral Type
-hi link yardParamName SpecialComment
+hi link yardParamName Debug
 hi link yardParam String
 hi link yardOption String
 hi link yardReturn Macro
