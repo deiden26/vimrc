@@ -49,7 +49,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'ryanoasis/vim-devicons'
 Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf.vim'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
 "Syntax Plugins"
@@ -103,6 +103,7 @@ let g:coc_global_extensions = [
 \  'coc-solargraph',
 \  'coc-pyright',
 \  'coc-flow',
+\  'coc-fzf-preview',
 \]
 " if hidden is not set, TextEdit might fail.
 set hidden
@@ -148,12 +149,13 @@ elseif executable('ag')
 endif
 
 " Replace the default fzf ripgrep command with one that accepts flags
-function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
-  let command = printf(command_fmt, a:query)
-  call fzf#vim#grep(command, 1, fzf#vim#with_preview(), a:fullscreen)
-endfunction
-command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
+" function! RipgrepFzf(query, fullscreen)
+"   let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
+"   let command = printf(command_fmt, a:query)
+"   call fzf#vim#grep(command, 1, fzf#vim#with_preview(), a:fullscreen)
+" endfunction
+" command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
+command! -nargs=* -bang Rg CocCommand fzf-preview.ProjectGrep <args>
 
 " Store previous fzf searches
 let g:fzf_history_dir = '~/.local/share/fzf-history'
@@ -190,6 +192,20 @@ let g:Hexokinase_ftEnabled = ['css', 'scss', 'html', 'javascript']
 let g:Hexokinase_ftOptInPatterns = {
 \     'javascript': 'full_hex,triple_hex,rgb,rgba,hsl,hsla',
 \ }
+
+"~~ fzf Preview ~~"
+let g:fzf_preview_use_dev_icons = 1
+let g:fzf_preview_dev_icons_limit = 15000
+let $FZF_PREVIEW_PREVIEW_BAT_THEME = ''
+" Use true colors in the fzf preview window
+" augroup fzf_preview
+"   autocmd!
+"   autocmd User fzf_preview#rpc#initialized call s:fzf_preview_settings() " fzf_preview#remote#initialized or fzf_preview#coc#initialized
+" augroup END
+" function! s:fzf_preview_settings() abort
+"   let g:fzf_preview_command = 'COLORTERM=truecolor ' . g:fzf_preview_command
+"   let g:fzf_preview_grep_preview_cmd = 'COLORTERM=truecolor ' . g:fzf_preview_grep_preview_cmd
+" endfunction
 
 "-------------------------------"
 " Custom Key Bindings
@@ -249,7 +265,10 @@ nmap <leader>ut :UndotreeToggle <CR>
 nnoremap <Leader>h :set cursorline! cursorcolumn!<CR>
 
 " Search all files with fzf
-nnoremap <silent> <C-p> :Files<CR>
+" nnoremap <silent> <C-p> :Files<CR>
+" Search all files with fzf Preview
+nnoremap <silent> <C-p> :CocCommand fzf-preview.ProjectFiles<CR>
+
 
 " Search all file text with ripgrep and fzf
 nnoremap <C-a> :Rg<SPACE>
