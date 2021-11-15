@@ -59,6 +59,7 @@ Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
 Plug 'styled-components/vim-styled-components', { 'branch': 'main', 'for': 'js' }
 Plug 'zinit-zsh/zinit-vim-syntax'
 Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
+Plug 'wilriker/gcode.vim', { 'for': 'gcode' }
 
 call plug#end()
 
