@@ -291,10 +291,8 @@ nnoremap <C-W>m :vnew<CR>
 " Enable folding with the spacebar
 nnoremap <space> za
 
-" Copy and paste with mac clipboard
+" Paste with mac clipboard
 nmap <Leader>v :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
-nmap <Leader>c :.w !pbcopy<CR><CR>
-vmap <Leader>c y:!echo<SPACE><C-R>"\|pbcopy<CR><CR>
 
 " Search for currently selected text
 vnoremap // y/<C-R>"
