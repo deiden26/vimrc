@@ -50,6 +50,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
 "Syntax Plugins"
@@ -73,6 +74,9 @@ if (has("termguicolors") && v:shell_error == 0)
 else
   let g:supports_true_color = 0
 endif
+
+" Base FZF Flags
+let g:base_fzf_flags = "--hidden --glob '!.git/*' --glob \!'* *'"
 
 "-------------------------------"
 " Plugin Options
@@ -149,7 +153,7 @@ endif
 
 " Replace the default fzf ripgrep command with one that accepts flags
 function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
+  let command_fmt = 'rg ' . g:base_fzf_flags . '-column --line-number --no-heading --color=always --smart-case %s || true'
   let command = printf(command_fmt, a:query)
   call fzf#vim#grep(command, 1, fzf#vim#with_preview(), a:fullscreen)
 endfunction
@@ -157,6 +161,9 @@ command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
 
 " Store previous fzf searches
 let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+" Default fzf project file command
+let $FZF_DEFAULT_COMMAND = 'rg --files --no-messages ' . g:base_fzf_flags
 
 " Don't show git-gutter unless toggled
 let g:gitgutter_signs = 0
