@@ -302,6 +302,8 @@ nmap gb gT
 
 " Toggle git blame
 nmap <Leader>b :Git blame<CR>
+" Toggle git commit history for the buffer
+nmap <Leader>c :BCommits<CR>
 
 " Toggle git-gutter
 nmap <Leader>g :GitGutterSignsToggle<CR>
