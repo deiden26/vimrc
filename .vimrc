@@ -50,7 +50,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
+Plug 'antoinemadec/coc-fzf', {'branch': 'release', 'do': 'brew install bat'}
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
 "Syntax Plugins"
@@ -60,6 +60,7 @@ Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
 Plug 'styled-components/vim-styled-components', { 'branch': 'main', 'for': 'js' }
 Plug 'zinit-zsh/zinit-vim-syntax'
 Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
+Plug 'wilriker/gcode.vim', { 'for': 'gcode' }
 
 call plug#end()
 
