@@ -357,7 +357,19 @@ inoremap <silent><expr> <TAB>
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-inoremap <expr><cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use enter to trigger selection of an auto complete option
+" NOTE: cannot use expr, because other plugins won't be able to
+" detect the mapping
+function! SendCY()
+    call feedkeys("\<C-Y>", "t")
+    return ""
+endfunction
+function! SendCR()
+    call feedkeys("\<CR>", "n")
+    return ""
+endfunction
+inoremap <silent> <CR> <C-R>=(pumvisible() ? SendCY() : SendCR())<CR>
 
 function! s:check_back_space() abort
   let col = col('.') - 1
