@@ -49,8 +49,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'ryanoasis/vim-devicons'
 Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'antoinemadec/coc-fzf', {'branch': 'release', 'do': 'brew install bat'}
+Plug 'junegunn/fzf.vim', { 'do': 'brew install bat' }
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
 "Syntax Plugins"
