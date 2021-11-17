@@ -352,29 +352,22 @@ nmap <leader>fa <Plug>(coc-format)
 nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Use tab for trigger completion with characters ahead and navigate. (Coc)
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-" Use enter to trigger selection of an auto complete option
-" NOTE: cannot use expr, because other plugins won't be able to
-" detect the mapping
-function! SendCY()
-    call feedkeys("\<C-Y>", "t")
-    return ""
-endfunction
-function! SendCR()
-    call feedkeys("\<CR>", "n")
-    return ""
-endfunction
-inoremap <silent> <CR> <C-R>=(pumvisible() ? SendCY() : SendCR())<CR>
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+" Use enter to trigger selection of an auto complete option
+" NOTE: Endwise conflicts with this unless mappings are disabled
+let g:endwise_no_mappings = 1
+imap <expr> <CR> pumvisible() ? "\<C-y>\<Plug>DiscretionaryEnd" : "\<C-g>u\<CR>\<Plug>DiscretionaryEnd"
+
 
 " Go to next Coc diagnostic
 nmap <Leader>dj <Plug>(coc-diagnostic-next)
