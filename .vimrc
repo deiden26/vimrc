@@ -362,13 +362,6 @@ inoremap <silent><expr> <TAB>
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-
-" Use enter to trigger selection of an auto complete option
-" NOTE: Endwise conflicts with this unless mappings are disabled
-let g:endwise_no_mappings = 1
-imap <expr> <CR> pumvisible() ? "\<C-y>\<Plug>DiscretionaryEnd" : "\<C-g>u\<CR>\<Plug>DiscretionaryEnd"
-
-
 " Go to next Coc diagnostic
 nmap <Leader>dj <Plug>(coc-diagnostic-next)
 " Go to previous Coc diagnostic
