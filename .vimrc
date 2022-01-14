@@ -51,6 +51,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim', { 'do': 'brew install bat' }
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+Plug 'vim-test/vim-test'
 
 "Syntax Plugins"
 Plug 'sheerun/vim-polyglot'
@@ -197,6 +198,9 @@ let g:Hexokinase_ftEnabled = ['css', 'scss', 'html', 'javascript']
 let g:Hexokinase_ftOptInPatterns = {
 \     'javascript': 'full_hex,triple_hex,rgb,rgba,hsl,hsla',
 \ }
+
+" vim-test commands execute using dispatch.vim
+let test#strategy = "dispatch"
 
 "-------------------------------"
 " Custom Key Bindings
@@ -381,6 +385,13 @@ noremap <leader>sr <Esc>:syntax sync fromstart<CR>
 
 " Exit terminal mode
 tnoremap <leader><Esc> <C-\><C-n>
+
+" vim-test bindings
+nmap <silent> <leader>tn :TestNearest<CR>
+nmap <silent> <leader>tf :TestFile<CR>
+nmap <silent> <leader>ts :TestSuite<CR>
+nmap <silent> <leader>tl :TestLast<CR>
+nmap <silent> <leader>tv :TestVisit<CR>
 
 "-------------------------------"
 " Commands
