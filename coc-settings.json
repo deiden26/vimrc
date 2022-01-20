@@ -18,5 +18,5 @@
   "typescript.validate.enable": false,
   "javascript.validate.enable": false,
 
-  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Enabled": true
 }
