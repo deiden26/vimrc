@@ -52,6 +52,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim', { 'do': 'brew install bat' }
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'vim-test/vim-test'
+Plug 'wesQ3/vim-windowswap'
 
 "Syntax Plugins"
 Plug 'sheerun/vim-polyglot'
