@@ -59,7 +59,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }
 Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
 Plug 'styled-components/vim-styled-components', { 'branch': 'main', 'for': 'js' }
-Plug 'zinit-zsh/zinit-vim-syntax'
+Plug 'zdharma-continuum/zinit-vim-syntax', { 'branch': 'main' }
 Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
 Plug 'wilriker/gcode.vim', { 'for': 'gcode' }
 
