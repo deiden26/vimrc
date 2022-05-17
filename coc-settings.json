@@ -14,6 +14,8 @@
   "solargraph.rename": true,
   "solargraph.references": true,
   "solargraph.useBundler": true,
+  "solargraph.commandPath": "$HOME/.rbenv/shims/solargraph",
+  "solargraph.bundlerPath": "$HOME/.rbenv/shims/bundler",
 
   "typescript.validate.enable": false,
   "javascript.validate.enable": false,
