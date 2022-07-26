@@ -78,7 +78,7 @@ else
 endif
 
 " Base FZF Flags
-let g:base_fzf_flags = "--hidden --glob '!.git/*' --glob \!'* *'"
+let g:base_fzf_flags = "--hidden --glob '!.git/*'"
 
 "-------------------------------"
 " Plugin Options
