@@ -20,5 +20,16 @@
   "typescript.validate.enable": false,
   "javascript.validate.enable": false,
 
-  "python.linting.flake8Enabled": true
+  "python.linting.flake8Enabled": true,
+
+  "languageserver": {
+    "sorbet": {
+      "command": "srb",
+      "args": ["tc", "--enable-all-experimental-lsp-features", "--lsp", "--disable-watchman"],
+      "filetypes": ["ruby"],
+      "rootPatterns": ["sorbet/config"],
+      "initializationOptions": {},
+      "settings": {}
+    }
+  }
 }
