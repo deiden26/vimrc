@@ -1,4 +1,6 @@
 {
+  "suggest.noselect": true,
+
   "diagnostic.errorSign": "𝗫",
   "diagnostic.warningSign": "▲",
   "diagnostic.infoSign": "●",
@@ -17,15 +19,15 @@
   "solargraph.commandPath": "$HOME/.rbenv/shims/solargraph",
   "solargraph.bundlerPath": "$HOME/.rbenv/shims/bundler",
 
-  "typescript.validate.enable": false,
-  "javascript.validate.enable": false,
+  // "typescript.validate.enable": false,
+  // "javascript.validate.enable": false,
 
   "python.linting.flake8Enabled": true,
 
   "languageserver": {
     "sorbet": {
       "command": "srb",
-      "args": ["tc", "--enable-all-experimental-lsp-features", "--lsp", "--disable-watchman"],
+      "args": ["tc", "--enable-all-beta-lsp-features", "--lsp", "--disable-watchman"],
       "filetypes": ["ruby"],
       "rootPatterns": ["sorbet/config"],
       "initializationOptions": {},

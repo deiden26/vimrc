@@ -91,7 +91,7 @@ let NERDTreeShowHidden=1
 let g:vim_jsx_pretty_colorful_config = 1
 
 "~~ vim-javascript Settings ~~"
-let g:javascript_plugin_flow = 1
+" let g:javascript_plugin_flow = 1
 
 
 "~~  vim-styled-components settings ~~"
@@ -108,8 +108,9 @@ let g:coc_global_extensions = [
 \  'coc-css',
 \  'coc-solargraph',
 \  'coc-pyright',
-\  'coc-flow',
 \]
+" \  'coc-flow',
+" \]
 " if hidden is not set, TextEdit might fail.
 set hidden
 " Some servers have issues with backup files, see #649
@@ -357,15 +358,16 @@ nmap <leader>fa <Plug>(coc-format)
 nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Use tab for trigger completion with characters ahead and navigate. (Coc)
-function! s:check_back_space() abort
+function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
+
+inoremap <silent><expr> <Tab>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
 
 " Go to next Coc diagnostic
 nmap <Leader>dj <Plug>(coc-diagnostic-next)
