@@ -53,6 +53,7 @@ Plug 'junegunn/fzf.vim', { 'do': 'brew install bat' }
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'vim-test/vim-test'
 Plug 'wesQ3/vim-windowswap'
+Plug 'Exafunction/codeium.vim'
 
 "Syntax Plugins"
 Plug 'sheerun/vim-polyglot'
@@ -398,6 +399,14 @@ nmap <silent> <leader>tf :TestFile<CR>
 nmap <silent> <leader>ts :TestSuite<CR>
 nmap <silent> <leader>tl :TestLast<CR>
 nmap <silent> <leader>tv :TestVisit<CR>
+
+" codeium
+let g:codeium_disable_bindings = 1
+imap <script><silent><nowait><expr> <C-k> codeium#Accept()
+imap <C-;>   <Cmd>call codeium#CycleCompletions(1)<CR>
+imap <C-l>   <Cmd>call codeium#CycleCompletions(-1)<CR>
+imap <C-x>   <Cmd>call codeium#Clear()<CR>
+imap <C-j>   <Cmd>call codeium#Complete()<CR>
 
 "-------------------------------"
 " Commands
