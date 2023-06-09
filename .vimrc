@@ -201,8 +201,11 @@ let g:Hexokinase_ftOptInPatterns = {
 \     'javascript': 'full_hex,triple_hex,rgb,rgba,hsl,hsla',
 \ }
 
-" vim-test commands execute using dispatch.vim
+" ~~ vim-test Settings ~~"
+" commands execute using dispatch.vim
 let test#strategy = "dispatch"
+" Do not watch for changes when running JS tests
+let test#javascript#reactscripts#options = '--no-watch --no-watchAll --bail'
 
 "-------------------------------"
 " Custom Key Bindings
