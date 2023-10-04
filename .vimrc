@@ -53,6 +53,7 @@ Plug 'junegunn/fzf.vim', { 'do': 'brew install bat' }
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'vim-test/vim-test'
 Plug 'wesQ3/vim-windowswap'
+Plug 'github/copilot.vim'
 
 "Syntax Plugins"
 Plug 'sheerun/vim-polyglot'
@@ -398,6 +399,14 @@ nmap <silent> <leader>tf :TestFile<CR>
 nmap <silent> <leader>ts :TestSuite<CR>
 nmap <silent> <leader>tl :TestLast<CR>
 nmap <silent> <leader>tv :TestVisit<CR>
+
+" Copilot
+let g:copilot_no_tab_map = v:true
+imap <script><silent><nowait><expr> <C-k> copilot#Accept()
+imap <C-;>   <Plug>(copilot-next)
+imap <C-l>   <Plug>(copilot-previous)
+imap <C-x>   <Plug>(copilot-dismiss)
+imap <C-j>   <Plug>(copilot-suggest)
 
 "-------------------------------"
 " Commands
