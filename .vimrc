@@ -314,6 +314,8 @@ nmap gb gT
 nmap <Leader>b :Git blame<CR>
 " Toggle git commit history for the buffer
 nmap <Leader>c :BCommits<CR>
+" Toggle git commit history for the selected lines
+vmap <Leader>c :BCommits<CR>
 
 " Toggle git-gutter
 nmap <Leader>g :GitGutterSignsToggle<CR>
