@@ -174,6 +174,8 @@ let g:gitgutter_signs = 0
 
 " Stop vim-rooter echoing the project directory
 let g:rooter_silent_chdir = 1
+" Only consider a directory a project if it contains a .git directory
+let g:rooter_patterns = ['.git']
 
 " Disable warning when toggling to clear a bookmark with annotation
 let g:bookmark_show_toggle_warning = 0
