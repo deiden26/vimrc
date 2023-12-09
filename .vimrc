@@ -109,6 +109,11 @@ let g:coc_global_extensions = [
 \  'coc-css',
 \  'coc-solargraph',
 \  'coc-pyright',
+<<<<<<< Updated upstream
+=======
+\  'coc-flow',
+\  'coc-elixir',
+>>>>>>> Stashed changes
 \]
 " \  'coc-flow',
 " \]

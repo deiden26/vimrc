@@ -1,5 +1,9 @@
 {
+<<<<<<< Updated upstream
   "suggest.noselect": true,
+=======
+  "suggest.noselect": true
+>>>>>>> Stashed changes
 
   "diagnostic.errorSign": "𝗫",
   "diagnostic.warningSign": "▲",
@@ -23,6 +27,8 @@
   // "javascript.validate.enable": false,
 
   "python.linting.flake8Enabled": true,
+
+  "elixir.pathToElixirLS": "~/.elixir-ls/release/language_server.sh",
 
   "languageserver": {
     "sorbet": {
