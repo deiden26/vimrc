@@ -533,3 +533,7 @@ if exists("loaded_matchit")
 \ '\<\%(else\|elsif\|ensure\|rescue\|when\)\>:\%(^\|[^.]\)\@<=\<end\>'
   endif
 endif
+
+" Check spelling in git commit and markdown files
+autocmd FileType gitcommit setlocal spell
+autocmd FileType markdown setlocal spell
