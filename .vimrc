@@ -255,9 +255,6 @@ vmap <Leader>fc y:%s/<C-r>"/<C-r>"
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
-" Map paste toggle to F1
-set pastetoggle=<F1>
-
 " Map fix indentation to F2
 map <F2> mzgg=G`z<CR>
 
@@ -412,6 +409,9 @@ imap <C-;>   <Plug>(copilot-next)
 imap <C-l>   <Plug>(copilot-previous)
 imap <C-x>   <Plug>(copilot-dismiss)
 imap <C-j>   <Plug>(copilot-suggest)
+
+" Prevent neovim LSP from overriding ReplaceWithRegister mappings
+nunmap gri
 
 "-------------------------------"
 " Commands
