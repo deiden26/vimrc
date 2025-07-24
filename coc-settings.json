@@ -1,9 +1,5 @@
 {
-<<<<<<< Updated upstream
   "suggest.noselect": true,
-=======
-  "suggest.noselect": true
->>>>>>> Stashed changes
 
   "diagnostic.errorSign": "𝗫",
   "diagnostic.warningSign": "▲",
@@ -20,8 +16,8 @@
   "solargraph.rename": true,
   "solargraph.references": true,
   "solargraph.useBundler": true,
-  "solargraph.commandPath": "$HOME/.rbenv/shims/solargraph",
-  "solargraph.bundlerPath": "$HOME/.rbenv/shims/bundler",
+  "solargraph.commandPath": "$HOME/.local/share/mise/shims/solargraph",
+  "solargraph.bundlerPath": "$HOME/.local/share/mise/shims/bundler",
 
   // "typescript.validate.enable": false,
   // "javascript.validate.enable": false,

@@ -12,7 +12,7 @@ endif
 let diffconflicts_hook = join([
 \"git config --global merge.tool diffconflicts\n",
 \"git config --global mergetool.diffconflicts.cmd\n",
-\"git config --global mergetool.diffconflicts.cmd 'vim -c DiffConflicts \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"'\n",
+\"git config --global mergetool.diffconflicts.cmd 'nvim -c DiffConflicts \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"'\n",
 \"git config --global mergetool.diffconflicts.trustExitCode true\n",
 \"git config --global mergetool.keepBackup false"
 \])
@@ -537,3 +537,6 @@ endif
 " Check spelling in git commit and markdown files
 autocmd FileType gitcommit setlocal spell
 autocmd FileType markdown setlocal spell
+
+" Prepend mise shims to PATH
+let $PATH = $HOME . '/.local/share/mise/shims:' . $PATH

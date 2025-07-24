@@ -1,10 +1,11 @@
 # (neo)Vim in a Box
 
 ### Steps to Success
-1. Ensure that vim and neovim are installed
+1. Ensure that neovim and some plugin dependencies are installed
 ```bash
-brew install vim
+brew install ripgrep
 brew install neovim
+brew install yarn
 ```
 2. Clone this repo
 3. `cd` into it
