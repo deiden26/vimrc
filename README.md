@@ -5,7 +5,6 @@
 ```bash
 brew install ripgrep
 brew install neovim
-brew install yarn
 ```
 2. Clone this repo
 3. `cd` into it

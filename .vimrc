@@ -19,50 +19,50 @@ let diffconflicts_hook = join([
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-endwise', { 'for': 'ruby' }
-Plug 'jiangmiao/auto-pairs'
-Plug 'tpope/vim-fugitive'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'tpope/vim-commentary'
-Plug 'tomasr/molokai'
-Plug 'dyng/ctrlsf.vim'
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-Plug 'airblade/vim-gitgutter', {'on': 'GitGutterSignsToggle'}
-Plug 'vim-scripts/ReplaceWithRegister'
-Plug 'airblade/vim-rooter'
-Plug 'MattesGroeger/vim-bookmarks'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'whiteinge/diffconflicts', {'do': diffconflicts_hook}
-Plug 'Valloric/ListToggle'
-Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-bundler'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-eunuch'
-Plug 'Konfekt/FastFold'
-Plug 'romainl/vim-cool'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-Plug 'ryanoasis/vim-devicons'
-Plug 'Yggdroot/indentLine'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim', { 'do': 'brew install bat' }
-Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
-Plug 'vim-test/vim-test'
-Plug 'wesQ3/vim-windowswap'
-Plug 'github/copilot.vim'
+ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+ Plug 'tpope/vim-surround'
+ Plug 'tpope/vim-endwise', { 'for': 'ruby' }
+ Plug 'jiangmiao/auto-pairs'
+ Plug 'tpope/vim-fugitive'
+ Plug 'vim-airline/vim-airline'
+ Plug 'vim-airline/vim-airline-themes'
+ Plug 'tpope/vim-commentary'
+ Plug 'tomasr/molokai'
+ Plug 'dyng/ctrlsf.vim'
+ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+ Plug 'airblade/vim-gitgutter', {'on': 'GitGutterSignsToggle'}
+ Plug 'vim-scripts/ReplaceWithRegister'
+ Plug 'airblade/vim-rooter'
+ Plug 'MattesGroeger/vim-bookmarks'
+ Plug 'editorconfig/editorconfig-vim'
+ Plug 'whiteinge/diffconflicts', {'do': diffconflicts_hook}
+ Plug 'Valloric/ListToggle'
+ Plug 'tpope/vim-abolish'
+ Plug 'tpope/vim-rails'
+ Plug 'tpope/vim-bundler'
+ Plug 'tpope/vim-dispatch'
+ Plug 'tpope/vim-eunuch'
+ Plug 'Konfekt/FastFold'
+ Plug 'romainl/vim-cool'
+ Plug 'neoclide/coc.nvim', {'branch': 'release'}
+ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+ Plug 'ryanoasis/vim-devicons'
+ Plug 'Yggdroot/indentLine'
+ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+ Plug 'junegunn/fzf.vim', { 'do': 'brew install bat' }
+ Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+ Plug 'vim-test/vim-test'
+ Plug 'wesQ3/vim-windowswap'
+ Plug 'github/copilot.vim'
 
 "Syntax Plugins"
-Plug 'sheerun/vim-polyglot'
-Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }
-Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
-Plug 'styled-components/vim-styled-components', { 'branch': 'main', 'for': 'js' }
-Plug 'zdharma-continuum/zinit-vim-syntax', { 'branch': 'main' }
-Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
-Plug 'wilriker/gcode.vim', { 'for': 'gcode' }
+ Plug 'sheerun/vim-polyglot'
+ Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }
+ Plug 'digitaltoad/vim-jade', { 'for': 'jade' }
+ Plug 'styled-components/vim-styled-components', { 'branch': 'main', 'for': 'js' }
+ Plug 'zdharma-continuum/zinit-vim-syntax', { 'branch': 'main' }
+ Plug 'noprompt/vim-yardoc', { 'for': 'ruby' }
+ Plug 'wilriker/gcode.vim', { 'for': 'gcode' }
 
 call plug#end()
 
