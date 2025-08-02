@@ -3,8 +3,13 @@
 ### Steps to Success
 1. Ensure that neovim and some plugin dependencies are installed
 ```bash
-brew install ripgrep
 brew install neovim
+brew install ripgrep
+brew install fzf
+brew install bat
+
+mise use go
+mise use node
 ```
 2. Clone this repo
 3. `cd` into it
@@ -18,6 +23,5 @@ ln -s $PWD/.vimrc /Users/$USER/.vimrc
 ln -s $PWD/init.vim /Users/$USER/.config/nvim/init.vim
 # 4. Link the Coc settings
 ln -s $PWD/coc-settings.json /Users/$USER/.config/nvim/coc-settings.json
-ln -s $PWD/coc-settings.json /Users/$USER/.vim/coc-settings.json
 ```
 
