@@ -465,6 +465,9 @@ hi link yardExample Title
 hi link yardGenericTag Tag
 hi link yardDeprecated Error
 
+" Markdown code block highlighting fix
+autocmd FileType markdown lua vim.treesitter.stop()
+
 "-------------------------------"
 " Tabs
 "-------------------------------"
