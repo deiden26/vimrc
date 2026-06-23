@@ -540,3 +540,6 @@ autocmd FileType markdown setlocal spell
 
 " Prepend mise shims to PATH
 let $PATH = $HOME . '/.local/share/mise/shims:' . $PATH
+
+" Disallow mouse reporting
+set mouse=
