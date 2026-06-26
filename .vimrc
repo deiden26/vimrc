@@ -189,6 +189,7 @@ set encoding=UTF-8
 let g:indentLine_char = '▏'
 " Don't hide characters like backticks in markdown docs
 autocmd BufNewFile,BufRead *.md let indentLine_setConceal=0
+autocmd FileType markdown setlocal conceallevel=0 concealcursor=
 
 "~~ Hexokinase Settings ~~"
 " Turn off Hexokinase if 24 bit true color is not supported
