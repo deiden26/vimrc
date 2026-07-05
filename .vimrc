@@ -113,6 +113,7 @@ let g:coc_global_extensions = [
 \]
 " \  'coc-flow',
 " \]
+
 " if hidden is not set, TextEdit might fail.
 set hidden
 " Some servers have issues with backup files, see #649
@@ -544,6 +545,26 @@ autocmd FileType markdown setlocal spell
 
 " Prepend mise shims to PATH
 let $PATH = $HOME . '/.local/share/mise/shims:' . $PATH
+
+let g:coc_user_config = get(g:, 'coc_user_config', {})
+
+if !executable('solargraph')
+  let g:coc_user_config['solargraph.enable'] = v:false
+endif
+
+if executable('srb')
+  let g:coc_user_config['languageserver'] = {
+    \ 'sorbet': {
+    \   'command': 'srb',
+    \   'args': ['tc', '--enable-all-beta-lsp-features', '--lsp', '--disable-watchman'],
+    \   'cwd': '${workspaceRoot}',
+    \   'filetypes': ['ruby'],
+    \   'rootPatterns': ['sorbet/config'],
+    \   'initializationOptions': {},
+    \   'settings': {}
+    \ }
+    \ }
+endif
 
 " Disallow mouse reporting
 set mouse=

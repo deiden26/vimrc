@@ -25,16 +25,4 @@
   "python.linting.flake8Enabled": true,
 
   "elixir.pathToElixirLS": "~/.elixir-ls/release/language_server.sh",
-
-  "languageserver": {
-    "sorbet": {
-      "command": "srb",
-      "args": ["tc", "--enable-all-beta-lsp-features", "--lsp", "--disable-watchman"],
-      "cwd": "${workspaceRoot}",
-      "filetypes": ["ruby"],
-      "rootPatterns": ["sorbet/config"],
-      "initializationOptions": {},
-      "settings": {}
-    }
-  }
 }
